@@ -1,13 +1,10 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { DMSans_400Regular, useFonts } from '@expo-google-fonts/dm-sans';
 import {
-  useFonts, DMSans_400Regular,
-} from '@expo-google-fonts/dm-sans'
-import {
-  DMSerifDisplay_400Regular,
-} from '@expo-google-fonts/dm-serif-display'
-import {ThemeProvider} from 'styled-components/native'
-import theme from '@src/theme';
+  DMSerifDisplay_400Regular
+} from '@expo-google-fonts/dm-serif-display';
+import { ThemeProvider } from 'styled-components/native';
+import { SignIn } from './src/screens/SignIn';
+import theme from './src/theme';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -19,7 +16,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      
+      <SignIn />
     </ThemeProvider>
   );
 }
