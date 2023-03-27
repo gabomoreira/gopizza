@@ -1062,6 +1062,16 @@
     "@babel/helper-validator-identifier" "^7.19.1"
     to-fast-properties "^2.0.0"
 
+"@expo-google-fonts/dm-sans@^0.2.3":
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/@expo-google-fonts/dm-sans/-/dm-sans-0.2.3.tgz#02e143be5dc103cc6b9f70519fcc19b5676cf3e6"
+  integrity sha512-sMrW6bc3ZWg5tyasDe6GB56N1/q/wY5zjMFp1vnA61MUX19mVd62ZiiubDaroSsQIhKEJvRW662NjDGUkqmEmg==
+
+"@expo-google-fonts/dm-serif-display@^0.2.3":
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/@expo-google-fonts/dm-serif-display/-/dm-serif-display-0.2.3.tgz#aee6a1e6b858852deb361a7185f226c7da0b9ed5"
+  integrity sha512-RdhKvpjCFg05q9S1z4S2+mdxr3QPjNjsgFT8pUVF8w2iP+l4HYkywxLC2gGH35LxL0jncdGhCAM1eTpK5qaP7A==
+
 "@expo/bunyan@4.0.0", "@expo/bunyan@^4.0.0":
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@expo/bunyan/-/bunyan-4.0.0.tgz#be0c1de943c7987a9fbd309ea0b1acd605890c7b"
