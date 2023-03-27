@@ -6,6 +6,8 @@ import {
 import {
   DMSerifDisplay_400Regular,
 } from '@expo-google-fonts/dm-serif-display'
+import {ThemeProvider} from 'styled-components/native'
+import theme from '@src/theme';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -16,8 +18,8 @@ export default function App() {
   if(!fontsLoaded) return null
 
   return (
-    <View>
-  
-    </View>
+    <ThemeProvider theme={theme}>
+      
+    </ThemeProvider>
   );
 }
