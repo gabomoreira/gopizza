@@ -6,6 +6,7 @@ import { StatusBar } from 'expo-status-bar';
 import { ThemeProvider } from 'styled-components/native';
 import { SignIn } from './src/screens/SignIn';
 import theme from './src/theme';
+import { AuthProvider } from './src/hooks/auth';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -19,7 +20,9 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <StatusBar backgroundColor='transparent' style='light' translucent />
 
-      <SignIn />
+      <AuthProvider>
+        <SignIn />
+      </AuthProvider>
     </ThemeProvider>
   );
 }
