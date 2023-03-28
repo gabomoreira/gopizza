@@ -4,6 +4,7 @@ import { ButtonBack } from "../../components/ButtonBack"
 import { Photo } from "../../components/Photo"
 import { Container, DeleteLabel, Header, PickImageButton, Title, Upload } from "./styles"
 import * as ImagePicker from 'expo-image-picker';
+import { InputPrice } from "../../components/InputPrice"
 
 
 export const Product = () => {
@@ -49,6 +50,12 @@ export const Product = () => {
                 onPress={handlePickerImage}
             />
        </Upload>
+
+       <InputPrice size="P" />
+       <InputPrice size="M" />
+       <InputPrice size="G" />
+
+         
 
     </Container>
   )
