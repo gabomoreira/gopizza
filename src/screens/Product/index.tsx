@@ -1,7 +1,7 @@
 import { Platform, TouchableOpacity } from "react-native"
 import { ButtonBack } from "../../components/ButtonBack"
 import { Photo } from "../../components/Photo"
-import { Container, DeleteLabel, Header, Title } from "./styles"
+import { Container, DeleteLabel, Header, PickImageButton, Title, Upload } from "./styles"
 
 
 export const Product = () => {
@@ -19,9 +19,13 @@ export const Product = () => {
             </TouchableOpacity>
         </Header>
 
+       <Upload>
         <Photo 
             uri='https://github.com/gabomoreira.png'
         />
+        <PickImageButton title="Carregar" type='secondary' />
+       </Upload>
+
     </Container>
   )
 }
