@@ -1,8 +1,9 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { createContext } from "react"
 import auth from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore';
 import { Alert } from "react-native"
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type User = {
     id: string
@@ -18,6 +19,8 @@ type AuthContextData = {
 type Props = {
     children: React.ReactNode
 }
+
+const USER_COLLECTION = '@gopizza:users'
 
 export const AuthContext = createContext({} as AuthContextData)
 
@@ -36,7 +39,7 @@ const AuthProvider = ({children}: Props) => {
             .collection('users')
             .doc(account.user.uid)
             .get()
-            .then(profile => {
+            .then(async (profile) => {
                 const {name, isAdmin} = profile.data() as User
 
                 if(profile.exists) {
@@ -45,8 +48,9 @@ const AuthProvider = ({children}: Props) => {
                         name,
                         isAdmin
                     }
-                    console.log(userData, 'data')
+                    await AsyncStorage.setItem(USER_COLLECTION, JSON.stringify(userData))
                     setUser(userData)
+
                 }
 
             }).catch(error => {
@@ -65,6 +69,25 @@ const AuthProvider = ({children}: Props) => {
         })
         .finally(() => setIsLoading(false))
     }
+
+    async function loadUserStorageData() {
+        setIsLoading(true)
+
+        const storedUser = await AsyncStorage.getItem(USER_COLLECTION)
+
+        if(storedUser) {
+            const userData = JSON.parse(storedUser) as User
+            console.log(userData, 'userDAta')
+            setUser(userData)
+        }
+
+
+        setIsLoading(false)
+    }
+
+    useEffect(() => {
+        loadUserStorageData()
+    }, [])
 
 
     return (
