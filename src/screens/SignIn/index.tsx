@@ -4,8 +4,19 @@ import { KeyboardAvoidingView, Platform  } from "react-native"
 import { Brand, Container, Content, Title, FotgotPasswordButton, FotgotPasswordLabel } from "./styles"
 
 import brandImg from '../../assets/brand.png'
+import { useAuth } from "../../hooks/auth"
+import { useState } from "react"
 
 export const SignIn = () => {
+  const {signIn, isLoading} = useAuth()
+
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  function handleSignIn() {
+    signIn(email, password)
+  }
+
   return (
     <Container>
        <KeyboardAvoidingView
@@ -22,12 +33,16 @@ export const SignIn = () => {
               type='secondary'
               autoCorrect={false}
               autoCapitalize='none'
+              value={email}
+              onChangeText={setEmail}
             />
 
             <Input 
               placeholder="Senha"
               type='secondary'
               secureTextEntry
+              value={password}
+              onChangeText={setPassword}
               />
 
             <FotgotPasswordButton>
@@ -39,6 +54,8 @@ export const SignIn = () => {
             <Button 
               title="Entrar"
               type='secondary'
+              onPress={handleSignIn}
+              isLoading={isLoading}
             />
           </Content>
        </KeyboardAvoidingView>
