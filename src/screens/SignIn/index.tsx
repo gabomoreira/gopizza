@@ -8,7 +8,7 @@ import { useAuth } from "../../hooks/auth"
 import { useState } from "react"
 
 export const SignIn = () => {
-  const {signIn, isLoading} = useAuth()
+  const {signIn, isLoading, signOut} = useAuth()
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
