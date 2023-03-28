@@ -8,13 +8,17 @@ import { useAuth } from "../../hooks/auth"
 import { useState } from "react"
 
 export const SignIn = () => {
-  const {signIn, isLoading, signOut} = useAuth()
+  const {signIn, isLoading, forgotPassword} = useAuth()
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   function handleSignIn() {
     signIn(email, password)
+  }
+
+  function handleForgotPassword() {
+    forgotPassword(email)
   }
 
   return (
@@ -45,7 +49,7 @@ export const SignIn = () => {
               onChangeText={setPassword}
               />
 
-            <FotgotPasswordButton>
+            <FotgotPasswordButton onPress={handleForgotPassword}>
               <FotgotPasswordLabel>
                 Esqueci minha senha
               </FotgotPasswordLabel>
