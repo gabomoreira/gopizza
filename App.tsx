@@ -7,6 +7,7 @@ import { ThemeProvider } from 'styled-components/native';
 import { SignIn } from './src/screens/SignIn';
 import theme from './src/theme';
 import { AuthProvider } from './src/hooks/auth';
+import { Product } from './src/screens/Product';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -21,7 +22,7 @@ export default function App() {
       <StatusBar backgroundColor='transparent' style='light' translucent />
 
       <AuthProvider>
-        <SignIn />
+        <Product />
       </AuthProvider>
     </ThemeProvider>
   );
