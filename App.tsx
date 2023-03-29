@@ -9,6 +9,7 @@ import theme from './src/theme';
 import { AuthProvider } from './src/hooks/auth';
 import { Product } from './src/screens/Product';
 import { Home } from './src/screens/Home';
+import { Routes } from './src/routes';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -23,7 +24,7 @@ export default function App() {
       <StatusBar backgroundColor='transparent' style='light' translucent />
 
       <AuthProvider>
-        <Home />
+        <Routes />
       </AuthProvider>
     </ThemeProvider>
   );
