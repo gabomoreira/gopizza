@@ -4,7 +4,7 @@ import { useTheme } from 'styled-components/native'
 import { Container, Content, Description, Details, Identification, Image, Line, Name } from './styles'
 import { TextInputProps } from 'react-native'
 
-type ProductProps = {
+export type ProductProps = {
     id: string
     photo_url: string
     name: string

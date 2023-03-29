@@ -1,11 +1,13 @@
-import { TouchableOpacity } from 'react-native'
+import { Alert, TouchableOpacity } from 'react-native'
 import { Container, Greeting, GreetingEmoji, GreetingText, Header, MenuHeader, MenuItemNumber, Title } from './styles'
 import {MaterialIcons } from '@expo/vector-icons'
+import firestore from '@react-native-firebase/firestore'
 
 import happyEmoji from '../../assets/happyemoji.png'
 import { useTheme } from 'styled-components/native'
 import { Search } from '../../components/Search'
-import { ProductCard } from '../../components/ProductCard'
+import { ProductCard, ProductProps } from '../../components/ProductCard'
+import { useEffect } from 'react'
 
 export const Home = () => {
   const {COLORS} = useTheme()
@@ -17,6 +19,29 @@ export const Home = () => {
   function handleOnClear() {
 
   }
+
+  function fetchPizzas(value: string) {
+    const formattedValue = value.toLowerCase().trim()
+
+    firestore()
+    .collection('pizzas')
+    .orderBy('name_insensitive')
+    .startAt(formattedValue)
+    .endAt(`${formattedValue}\uf8ff`) //uf8ff limit 
+    .get()
+    .then(response => {
+      const data = response.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      })) as ProductProps[]
+      console.log(data, 'data')
+    })
+    .catch(() => Alert.alert('Consulta', 'Não foi possível realizar a consulta'))
+  }
+
+  useEffect(() => {
+    fetchPizzas('')
+  }, [])
 
   return (
     <Container>
