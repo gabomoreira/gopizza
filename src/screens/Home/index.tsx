@@ -1,5 +1,5 @@
 import { Alert, FlatList, TouchableOpacity } from 'react-native'
-import { Container, Greeting, GreetingEmoji, GreetingText, Header, MenuHeader, MenuItemNumber, Title } from './styles'
+import { Container, Greeting, GreetingEmoji, GreetingText, Header, MenuHeader, MenuItemNumber, NewProductButton, Title } from './styles'
 import {MaterialIcons } from '@expo/vector-icons'
 import firestore from '@react-native-firebase/firestore'
 
@@ -48,6 +48,11 @@ export const Home = () => {
   function handleOpen(id: string) {
     navigation.navigate('product', {id})
   }
+  
+  function handleAdd() {
+    navigation.navigate('product', {})
+  }
+
 
   useEffect(() => {
     fetchPizzas('')
@@ -93,6 +98,12 @@ export const Home = () => {
           paddingBottom: 125,
           marginHorizontal: 24
         }}
+      />
+
+      <NewProductButton 
+        title='Cdastrar Pizza'
+        type='secondary'
+        onPress={handleAdd}
       />
     </Container>
   )

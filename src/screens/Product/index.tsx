@@ -3,7 +3,7 @@ import storage from '@react-native-firebase/storage'
 import { useNavigation, useRoute } from "@react-navigation/native"
 import * as ImagePicker from 'expo-image-picker'
 import { useEffect, useState } from "react"
-import { Alert, Platform, ScrollView, TouchableOpacity } from "react-native"
+import { Alert, Platform, ScrollView, TouchableOpacity, View } from "react-native"
 import { ProductNavigationProps } from "../../@types/navigation"
 import { Button } from "../../components/Button"
 import { ButtonBack } from "../../components/ButtonBack"
@@ -137,22 +137,31 @@ export const Product = () => {
                 <Title>
                     Cadastrar
                 </Title>
-                <TouchableOpacity>
-                    <DeleteLabel>
-                        Deletar
-                    </DeleteLabel>
-                </TouchableOpacity>
+               {id ? (
+                    <TouchableOpacity>
+                        <DeleteLabel>
+                            Deletar
+                        </DeleteLabel>
+                    </TouchableOpacity>
+               ) : (
+                <View style={{width: 20}} />
+               )
+            }
             </Header>
 
         <Upload>
                 <Photo 
                     uri={image}
                 />
-                <PickImageButton 
-                    title="Carregar" 
-                    type='secondary' 
-                    onPress={handlePickerImage}
-                />
+                {
+                    !id && (
+                        <PickImageButton 
+                            title="Carregar" 
+                            type='secondary' 
+                            onPress={handlePickerImage}
+                        />
+                    )
+                }
         </Upload>
 
             <Form>
@@ -182,11 +191,15 @@ export const Product = () => {
                     <InputPrice size="G" onChangeText={setPriceSizeG} value={priceSizeG}/>
                 </InputGroup>
             
-                <Button 
-                    title='Cadastrar produto'
-                    isLoading={isLoading}
-                    onPress={handleAdd}
-                />
+               {
+                !id && (
+                    <Button 
+                        title='Cadastrar produto'
+                        isLoading={isLoading}
+                        onPress={handleAdd}
+                    />
+                )
+               }
             </Form>
         </ScrollView>
     </Container>
