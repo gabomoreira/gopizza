@@ -4,9 +4,18 @@ import {MaterialIcons } from '@expo/vector-icons'
 
 import happyEmoji from '../../assets/happyemoji.png'
 import { useTheme } from 'styled-components/native'
+import { Search } from '../../components/Search'
 
 export const Home = () => {
   const {COLORS} = useTheme()
+
+  function handleOnSearch() {
+    
+  }
+
+  function handleOnClear() {
+
+  }
 
   return (
     <Container>
@@ -20,6 +29,8 @@ export const Home = () => {
           <MaterialIcons name='logout' color={COLORS.TITLE} size={24} />
         </TouchableOpacity>
       </Header>
+
+      <Search onClear={handleOnClear} onSearch={handleOnSearch} />
     </Container>
   )
 }
