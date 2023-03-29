@@ -1,5 +1,5 @@
 import { TouchableOpacity } from 'react-native'
-import { Container, Greeting, GreetingEmoji, GreetingText, Header } from './styles'
+import { Container, Greeting, GreetingEmoji, GreetingText, Header, MenuHeader, MenuItemNumber, Title } from './styles'
 import {MaterialIcons } from '@expo/vector-icons'
 
 import happyEmoji from '../../assets/happyemoji.png'
@@ -31,6 +31,11 @@ export const Home = () => {
       </Header>
 
       <Search onClear={handleOnClear} onSearch={handleOnSearch} />
+
+      <MenuHeader>
+        <Title>Cardápio</Title>
+        <MenuItemNumber>10 pizzas</MenuItemNumber>
+      </MenuHeader>
     </Container>
   )
 }
