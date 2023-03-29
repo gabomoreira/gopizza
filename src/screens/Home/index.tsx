@@ -1,4 +1,4 @@
-import { Alert, TouchableOpacity } from 'react-native'
+import { Alert, FlatList, TouchableOpacity } from 'react-native'
 import { Container, Greeting, GreetingEmoji, GreetingText, Header, MenuHeader, MenuItemNumber, Title } from './styles'
 import {MaterialIcons } from '@expo/vector-icons'
 import firestore from '@react-native-firebase/firestore'
@@ -7,10 +7,12 @@ import happyEmoji from '../../assets/happyemoji.png'
 import { useTheme } from 'styled-components/native'
 import { Search } from '../../components/Search'
 import { ProductCard, ProductProps } from '../../components/ProductCard'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 export const Home = () => {
   const {COLORS} = useTheme()
+
+  const [pizzas, setPizzas] = useState<ProductProps[]>()
 
   function handleOnSearch() {
     
@@ -34,7 +36,7 @@ export const Home = () => {
         id: doc.id,
         ...doc.data()
       })) as ProductProps[]
-      console.log(data, 'data')
+      setPizzas(data)
     })
     .catch(() => Alert.alert('Consulta', 'Não foi possível realizar a consulta'))
   }
@@ -63,12 +65,16 @@ export const Home = () => {
         <MenuItemNumber>10 pizzas</MenuItemNumber>
       </MenuHeader>
 
-      <ProductCard 
-        data={{
-          id: '1', 
-          name: 'Pizza', 
-          description: 'lorem asdasd', 
-          photo_url: 'https://github.com/gabomoreira.png'}}
+      <FlatList 
+        data={pizzas}
+        keyExtractor={item => item.id}
+        renderItem={({item}) => <ProductCard data={item} />}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{
+          paddingTop: 20,
+          paddingBottom: 125,
+          marginHorizontal: 24
+        }}
       />
     </Container>
   )
