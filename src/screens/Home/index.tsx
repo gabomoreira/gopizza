@@ -13,13 +13,11 @@ export const Home = () => {
   const {COLORS} = useTheme()
 
   const [pizzas, setPizzas] = useState<ProductProps[]>()
+  const [search, setSearch] = useState('')
 
-  function handleOnSearch() {
-    
-  }
-
-  function handleOnClear() {
-
+  function handleSearchClear() {
+    setSearch('')
+    fetchPizzas('')
   }
 
   function fetchPizzas(value: string) {
@@ -41,6 +39,10 @@ export const Home = () => {
     .catch(() => Alert.alert('Consulta', 'Não foi possível realizar a consulta'))
   }
 
+  function handleSearch() {
+    fetchPizzas(search)
+  }
+
   useEffect(() => {
     fetchPizzas('')
   }, [])
@@ -58,7 +60,12 @@ export const Home = () => {
         </TouchableOpacity>
       </Header>
 
-      <Search onClear={handleOnClear} onSearch={handleOnSearch} />
+      <Search 
+        value={search}
+        onChangeText={setSearch}
+        onClear={handleSearchClear} 
+        onSearch={handleSearch} 
+      />
 
       <MenuHeader>
         <Title>Cardápio</Title>
