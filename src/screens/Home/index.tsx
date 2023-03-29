@@ -7,14 +7,14 @@ import happyEmoji from '../../assets/happyemoji.png'
 import { useTheme } from 'styled-components/native'
 import { Search } from '../../components/Search'
 import { ProductCard, ProductProps } from '../../components/ProductCard'
-import { useEffect, useState } from 'react'
-import { useNavigation } from '@react-navigation/native'
+import { useCallback, useEffect, useState } from 'react'
+import { useFocusEffect, useNavigation } from '@react-navigation/native'
 
 export const Home = () => {
   const {COLORS} = useTheme()
   const navigation = useNavigation()
 
-  const [pizzas, setPizzas] = useState<ProductProps[]>()
+  const [pizzas, setPizzas] = useState<ProductProps[]>([])
   const [search, setSearch] = useState('')
 
   function handleSearchClear() {
@@ -53,10 +53,9 @@ export const Home = () => {
     navigation.navigate('product', {})
   }
 
-
-  useEffect(() => {
+  useFocusEffect(useCallback(() => {
     fetchPizzas('')
-  }, [])
+  }, []))
 
   return (
     <Container>
@@ -80,7 +79,7 @@ export const Home = () => {
 
       <MenuHeader>
         <Title>Cardápio</Title>
-        <MenuItemNumber>10 pizzas</MenuItemNumber>
+        <MenuItemNumber>{pizzas.length} pizzas</MenuItemNumber>
       </MenuHeader>
 
       <FlatList 

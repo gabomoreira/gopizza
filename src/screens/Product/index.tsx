@@ -75,7 +75,10 @@ export const Product = () => {
             photo_url,
             photo_path: reference.fullPath
         })
-        .then(() => Alert.alert('Cadastro', 'Pizza cadastrada com sucesso.'))
+        .then(() => {
+            Alert.alert('Cadastro', 'Pizza cadastrada com sucesso.')
+            navigation.navigate('home')
+        })
         .catch(() => Alert.alert('Cadastro', 'Não foi possível cadastrar a pizza.'))
         .finally(() => {
             setIsLoading(false)
@@ -108,6 +111,19 @@ export const Product = () => {
     navigation.navigate('home')
  }
 
+ function handleDelete() {
+    firestore()
+    .collection('pizzas')
+    .doc(id)
+    .delete()
+    .then(() => {
+        storage()
+        .ref(photoPath)
+        .delete()
+        .then(() => navigation.navigate('home'))
+    })
+ }
+
  useEffect(() => {
     if(id) {
         firestore()
@@ -138,7 +154,7 @@ export const Product = () => {
                     Cadastrar
                 </Title>
                {id ? (
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={handleDelete}>
                         <DeleteLabel>
                             Deletar
                         </DeleteLabel>
